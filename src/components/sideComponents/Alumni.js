@@ -24,7 +24,7 @@ const Alumni = () => {
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/alumni", {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/alumni`, {
           headers: {
             Authorization: `Bearer ${user.token}`, // Include the token from context
           },
@@ -45,7 +45,7 @@ const Alumni = () => {
     try {
         const token=user.token
 
-      await axios.delete(`http://localhost:5000/alumni/${alumniId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/alumni/${alumniId}`, {
         headers: { Authorization: `Bearer ${token}` }, // Send auth token
       });
 
@@ -69,7 +69,7 @@ const Alumni = () => {
     formData.append("profile", profile); // Ensure profile is a File object
 
     try {
-      const response = await axios.post("http://localhost:5000/alumni", formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/alumni`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

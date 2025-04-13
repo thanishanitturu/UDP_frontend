@@ -18,7 +18,7 @@ const Jobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/jobs");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/jobs`);
         setJobs(response.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -31,7 +31,7 @@ const Jobs = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/jobs",
+        "${process.env.REACT_APP_API_URL}/jobs",
         {
           title: jobTitle,
           description: jobDescription,
@@ -58,7 +58,7 @@ const Jobs = () => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/jobs/${jobId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/jobs/${jobId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 

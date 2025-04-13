@@ -15,7 +15,7 @@ const ProfilePage = () => {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/users/${userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/${userId}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);

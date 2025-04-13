@@ -21,7 +21,7 @@ const Clubs = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/clubs", {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/clubs`, {
           headers: {
             Authorization: `Bearer ${user.token}`, // Include the token from context
           },
@@ -46,7 +46,7 @@ const handleDeleteClub = async (clubId) => {
       return;
     }
 
-    await axios.delete(`http://localhost:5000/clubs/${clubId}`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/clubs/${clubId}`, {
       headers: { Authorization: `Bearer ${token}` }, // Send auth token
     });
 
@@ -67,7 +67,7 @@ const handleCreateClub = async (e) => {
   formData.append("logo", clubLogo); // Ensure logo is a File object
 
   try {
-    const response = await axios.post("http://localhost:5000/clubs", formData, {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/clubs`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
@@ -90,7 +90,7 @@ const handleCreateClub = async (e) => {
     
     try {
       const response = await axios.post(
-        `http://localhost:5000/clubs/${clubId}/join`,
+        `${process.env.REACT_APP_API_URL}/clubs/${clubId}/join`,
         {},
         {
           headers: {

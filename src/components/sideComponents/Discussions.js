@@ -22,7 +22,7 @@ const DiscussionForum = () => {
 
   const fetchThreads = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/threads");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/threads`);
       setThreads(response.data);
     } catch (error) {
       console.error("Error fetching threads:", error);
@@ -32,7 +32,7 @@ const DiscussionForum = () => {
   const handleLikeThread = async (threadId) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/threads/${threadId}/like`,
+        `${process.env.REACT_APP_API_URL}/threads/${threadId}/like`,
         {},
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
@@ -49,7 +49,7 @@ const DiscussionForum = () => {
   const handleDislikeThread = async (threadId) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/threads/${threadId}/dislike`,
+        `${process.env.REACT_APP_API_URL}/threads/${threadId}/dislike`,
         {},
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
@@ -69,7 +69,7 @@ const DiscussionForum = () => {
       const author = user.userName;
       const authorId = user.id;
       const response = await axios.post(
-        "http://localhost:5000/threads",
+        "${process.env.REACT_APP_API_URL}/threads",
         { title, content, author, authorId },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
@@ -105,7 +105,7 @@ const DiscussionForum = () => {
   const handleReplySubmit = async (threadId) => {
   try {
     const response = await axios.post(
-      `http://localhost:5000/threads/${threadId}/replies`,
+      `${process.env.REACT_APP_API_URL}/threads/${threadId}/replies`,
       { content: replyContent, author: user.userName, authorId: user.id },
       { headers: { Authorization: `Bearer ${user.token}` } }
     );
@@ -128,7 +128,7 @@ const DiscussionForum = () => {
 
   const handleDeleteThread = async (threadId) => {
   try {
-    await axios.delete(`http://localhost:5000/threads/${threadId}`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/threads/${threadId}`, {
       headers: { Authorization: `Bearer ${user.token}` },
     });
     // Remove the deleted thread from the state

@@ -21,7 +21,7 @@ const Announcements = () => {
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/announcements");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/announcements`);
         setAnnouncements(response.data);
       } catch (error) {
         console.error("Error fetching announcements:", error);
@@ -37,7 +37,7 @@ const Announcements = () => {
     e.preventDefault();
     try {
        const response = await axios.post(
-      'http://localhost:5000/announcements',
+      `${process.env.REACT_APP_API_URL}/announcements`,
       {
         title,
         description,

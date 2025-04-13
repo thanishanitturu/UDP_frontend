@@ -21,7 +21,7 @@ const [loadingDownload, setLoadingDownload] = useState({});  // Track upload loa
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/schedules");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/schedules`);
         setSchedules(response.data);
       } catch (error) {
         console.error("Error fetching schedules:", error);
@@ -90,7 +90,7 @@ const handleDownload = async (fileUrl, fileName) => {
     formData.append("uploadedBy", user?.id);
 
     try {
-      const response = await axios.post("http://localhost:5000/schedules", formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/schedules`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setSchedules((prev) => [...prev, response.data]);

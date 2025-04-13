@@ -16,7 +16,7 @@ const handleSubmit = async (e) => {
   console.log("Submitting Data:", { email, name, googleId, userType });
 
   try {
-    const response = await axios.post("http://localhost:5000/auth/save-user-type", {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/save-user-type`, {
       email,
       name,
       googleId,
